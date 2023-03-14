@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer {
+  html,
+  body {
+    height: 100%;
+    width: 100%;
+    font-size: 16px;
+  }
+  #__next {
+    height: 100%;
+  }
+  .shadow-personal {
+    box-shadow: 0px 7px 3px -1px rgba(0, 0, 0, 0.192);
+    -webkit-box-shadow: 0px 7px 3px -1px rgba(0, 0, 0, 0.192);
+    -moz-box-shadow: 0px 7px 3px -1px rgba(0, 0, 0, 0.192);
+  }
+}
