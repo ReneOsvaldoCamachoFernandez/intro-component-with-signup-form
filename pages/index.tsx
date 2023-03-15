@@ -110,25 +110,25 @@ export default function Home() {
               developers think is invaluable.
             </p>
           </div>
-          <div className="flex flex-col gap-5 xl:gap-6 xl:w-[50%] ">
+          <div className="flex flex-col xl:h-full gap-5 xl:gap-6 xl:w-[50%] ">
             <div className="bg-[#6055A5] py-6 px-12 xl:py-4 rounded-lg text-center text-white shadow-personal">
               <span className="font-semibold">Try it free 7 days</span>
               <span className="text-white/50"> then $20/mo. thereafter</span>
             </div>
-            <div className="bg-white p-4 h-[100%] xl:p-10 xl:px-10 rounded-md flex flex-col shadow-personal gap-2 xl:gap-0">
+            <div className="bg-white p-4 xl:h-[100%] xl:p-10 xl:px-10 rounded-md flex flex-col shadow-personal gap-2 xl:gap-0">
               <form
                 action=""
                 method="post"
-                className="flex flex-col h-[100%] gap-2 xl:gap-0 text-black "
+                className="flex flex-col xl:h-[100%] gap-2 xl:gap-0 text-black "
               >
-                <div className="flex flex-col relative h-[100%]">
+                <div className="flex flex-col relative xl:h-[100%]">
                   <input
                     type="text"
                     name="First Name"
                     id="First Name"
                     placeholder="First Name"
                     required
-                    className="border-2 p-3 h-full rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm border-gray-300 font-semibold "
+                    className="border-2 p-3 xl:h-full rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm border-gray-300 font-semibold "
                     onFocus={ClearInput}
                   />
                   <label
@@ -155,7 +155,7 @@ export default function Home() {
                     placeholder="Last Name"
                     required
                     onFocus={ClearInput}
-                    className="border-2 p-3 h-full  rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm border-gray-300 font-semibold"
+                    className="border-2 p-3 xl:h-full  rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm border-gray-300 font-semibold"
                   />
                   <label
                     htmlFor="Last Name"
@@ -172,7 +172,7 @@ export default function Home() {
                     className="absolute top-[20%] right-4 hidden  ErrorIcon"
                   ></Image>
                 </div>
-                <div className="flex flex-col relative h-full">
+                <div className="flex flex-col relative xl:h-full">
                   <input
                     type="email"
                     name="Email Address"
@@ -198,7 +198,7 @@ export default function Home() {
                     className="absolute top-[20%] right-4 hidden ErrorIcon"
                   ></Image>
                 </div>
-                <div className="flex flex-col relative h-full">
+                <div className="flex flex-col relative xl:h-full">
                   <input
                     type="password"
                     name="Password"
@@ -206,7 +206,7 @@ export default function Home() {
                     placeholder="Password"
                     required
                     onFocus={ClearInput}
-                    className="border-2 p-3 h-full  rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm border-gray-300 font-semibold"
+                    className="border-2 p-3 xl:h-full  rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm border-gray-300 font-semibold"
                   />
                   <label
                     htmlFor="Password"
@@ -226,7 +226,7 @@ export default function Home() {
                 <div className="flex flex-col shadow-md h-full">
                   <button
                     type="submit"
-                    className="bg-[#38CC8C] h-full  border-b-4 border-[#258b5f] text-center p-3 rounded-md text-white uppercase hover:bg-[#73f4bc] hover:border-[#33c083]"
+                    className="bg-[#38CC8C] xl:h-full  border-b-4 border-[#258b5f] text-center p-3 rounded-md text-white uppercase hover:bg-[#73f4bc] hover:border-[#33c083]"
                     onClick={handleFirstNameInput}
                   >
                     Claim your free trial
