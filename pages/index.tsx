@@ -1,10 +1,13 @@
 import Head from "next/head";
 import Image from "next/image";
-import React, { useState } from "react";
+import React from "react";
+import { useBreakpoint } from "../hooks/useBreakpoint";
 import bgmovil from "/public/bg-intro-mobile.png";
+import bgdesktop from "/public/bg-intro-desktop.png";
 
 export default function Home() {
-  let setFirstNameState = true;
+  const breakpoint = useBreakpoint();
+  const bgImage = breakpoint.xl == true ? bgdesktop : bgmovil;
 
   function handleFirstNameInput(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
@@ -88,35 +91,35 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon-32x32.png" />
       </Head>
-      <main className="h-[1000px] flex flex-col justify-around  relative">
+      <main className="h-[1000px]  xl:h-[100%] xl:w-[100%] flex flex-col justify-around  relative">
         <Image
-          src={bgmovil}
+          src={bgImage}
           alt="bg-intro-pic"
-          className="absolute z-10"
+          className="absolute z-10 xl:h-[100%] xl:w-[100%]"
         ></Image>
         <div className="absolute bg-[#FF7A7A] w-[100%] h-[100%] z-0"></div>
 
-        <div className="z-20 w-full absolute px-5 flex flex-col gap-14">
-          <div className="text-center text-white pb-2 mt-3">
-            <h1 className="mb-8 font-bold text-2xl px-10 ">
+        <div className="z-20 w-full top-[10%] xl:top-[20%] xl:left-[15%] xl:h-[60%] xl:w-[70%] absolute px-5 xl:px-0 flex flex-col xl:flex-row gap-14">
+          <div className="text-center xl:text-left text-white pb-2 mt-3 xl:mt-0 xl:w-[50%] xl:flex xl:flex-col xl:justify-center">
+            <h1 className="mb-8 font-bold text-2xl px-10 xl:px-0 xl:text-5xl">
               Learn to code by watching others
             </h1>
-            <p className="px-3 leading-relaxed">
+            <p className="px-3 xl:px-0 leading-relaxed">
               See how experienced developers solve problems in real-time.
               Watching scripted tutorials is great, but understanding how
               developers think is invaluable.
             </p>
           </div>
-          <div className="flex flex-col gap-5">
-            <div className="bg-[#6055A5] py-6 px-12 rounded-lg text-center text-white shadow-personal">
+          <div className="flex flex-col gap-5 xl:gap-6 xl:w-[50%] ">
+            <div className="bg-[#6055A5] py-6 px-12 xl:py-4 rounded-lg text-center text-white shadow-personal">
               <span className="font-semibold">Try it free 7 days</span>
               <span className="text-white/50"> then $20/mo. thereafter</span>
             </div>
-            <div className="bg-white p-4 rounded-md flex flex-col shadow-personal gap-2">
+            <div className="bg-white p-4 xl:p-10 xl:px-10 rounded-md flex flex-col shadow-personal gap-2 xl:gap-0">
               <form
                 action=""
                 method="post"
-                className="flex flex-col gap-2 text-black"
+                className="flex flex-col gap-2 xl:gap-0 text-black "
               >
                 <div className="flex flex-col relative">
                   <input
@@ -223,7 +226,7 @@ export default function Home() {
                 <div className="flex flex-col shadow-md">
                   <button
                     type="submit"
-                    className="bg-[#38CC8C] text-center p-3 rounded-md text-white uppercase "
+                    className="bg-[#38CC8C] border-b-4 border-[#258b5f] text-center p-3 rounded-md text-white uppercase hover:bg-[#73f4bc] hover:border-[#33c083]"
                     onClick={handleFirstNameInput}
                   >
                     Claim your free trial
