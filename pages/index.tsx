@@ -13,24 +13,43 @@ export default function Home() {
       document.querySelectorAll("label"),
       document.getElementsByClassName("ErrorIcon"),
     ];
-    inputs.forEach((input, indx) => {
-      if (!input.validity.valid) {
-        input.classList.add("border-red-500");
-        input.value = "";
-        if (input.id == "Email Address") {
+
+    {
+      inputs.forEach((input, indx) => {
+        if (input.value == "") {
+          input.classList.add("border-red-500");
+          input.value = "";
+          input.placeholder = "";
+
+          icons[indx].classList.remove("hidden");
+          icons[indx].classList.add("block");
+        }
+        if (input.id == "Email Address" && !input.validity.valid) {
           input.placeholder = "email@example/com";
           input.classList.add("placeholder:text-red-500/50");
           input.classList.add("text-xs");
           input.classList.add("pl-5");
-        } else {
-          input.placeholder = "";
+          input.value = "";
+
+          icons[indx].classList.remove("hidden");
+          icons[indx].classList.add("block");
         }
+      });
+    }
+  }
+  function errorIconClick(event: React.MouseEvent<HTMLImageElement>) {
+    const labels = document.querySelectorAll("label");
+    const iconos = document.getElementsByClassName("ErrorIcon");
 
-        labels[indx].classList.remove("text-white");
-        labels[indx].classList.add("text-red-500");
-
-        icons[indx].classList.remove("hidden");
-        icons[indx].classList.add("block");
+    Array.from(iconos).map((icn, indx) => {
+      if (icn == event.target) {
+        if (labels[indx].classList.contains("text-white")) {
+          labels[indx].classList.remove("text-white");
+          labels[indx].classList.add("text-red-500");
+        } else {
+          labels[indx].classList.add("text-white");
+          labels[indx].classList.remove("text-red-500");
+        }
       }
     });
   }
@@ -77,23 +96,23 @@ export default function Home() {
         ></Image>
         <div className="absolute bg-[#FF7A7A] w-[100%] h-[100%] z-0"></div>
 
-        <div className="z-20 w-full absolute p-5 flex flex-col gap-10">
-          <div className="text-center text-white pb-2">
-            <h1 className="mb-4 font-bold text-xl px-20">
+        <div className="z-20 w-full absolute px-5 flex flex-col gap-14">
+          <div className="text-center text-white pb-2 mt-3">
+            <h1 className="mb-8 font-bold text-2xl px-10 ">
               Learn to code by watching others
             </h1>
-            <p className="px-3">
+            <p className="px-3 leading-relaxed">
               See how experienced developers solve problems in real-time.
               Watching scripted tutorials is great, but understanding how
               developers think is invaluable.
             </p>
           </div>
-          <div className="flex flex-col gap-4 ">
-            <div className="bg-[#6055A5] py-4 px-12 rounded-lg text-center text-white shadow-personal">
+          <div className="flex flex-col gap-5">
+            <div className="bg-[#6055A5] py-6 px-12 rounded-lg text-center text-white shadow-personal">
               <span className="font-semibold">Try it free 7 days</span>
               <span className="text-white/50"> then $20/mo. thereafter</span>
             </div>
-            <div className="bg-white p-4 rounded-md flex flex-col shadow-personal gap-1">
+            <div className="bg-white p-4 rounded-md flex flex-col shadow-personal gap-2">
               <form
                 action=""
                 method="post"
@@ -106,8 +125,7 @@ export default function Home() {
                     id="First Name"
                     placeholder="First Name"
                     required
-                    pattern="^[A-Z][a-z]*([ ]?[A-Z]?[a-z]*)*$"
-                    className="border-2 p-3 rounded-md block w-full shadow-sm border-gray-300 font-semibold "
+                    className="border-2 p-3 rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm border-gray-300 font-semibold "
                     onFocus={ClearInput}
                   />
                   <label
@@ -123,6 +141,7 @@ export default function Home() {
                     width={24}
                     height={24}
                     className="absolute top-[20%] right-4 hidden  ErrorIcon"
+                    onClick={errorIconClick}
                   ></Image>
                 </div>
                 <div className="flex flex-col relative">
@@ -132,7 +151,6 @@ export default function Home() {
                     id="Last Name"
                     placeholder="Last Name"
                     required
-                    pattern="^[A-Z][a-z]*([ ]?[A-Z]?[a-z]*)*$"
                     onFocus={ClearInput}
                     className="border-2 p-3 rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm border-gray-300 font-semibold"
                   />
@@ -147,6 +165,7 @@ export default function Home() {
                     alt=""
                     width={24}
                     height={24}
+                    onClick={errorIconClick}
                     className="absolute top-[20%] right-4 hidden  ErrorIcon"
                   ></Image>
                 </div>
@@ -159,7 +178,7 @@ export default function Home() {
                     required
                     pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
                     onFocus={ClearInput}
-                    className="border-2 p-3 rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm border-gray-300 font-semibold"
+                    className="border-2 p-3 rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full h-[52px] shadow-sm border-gray-300 font-semibold"
                   />
                   <label
                     htmlFor="Email Address"
@@ -172,6 +191,7 @@ export default function Home() {
                     alt=""
                     width={24}
                     height={24}
+                    onClick={errorIconClick}
                     className="absolute top-[20%] right-4 hidden ErrorIcon"
                   ></Image>
                 </div>
@@ -182,9 +202,6 @@ export default function Home() {
                     id="Password"
                     placeholder="Password"
                     required
-                    minLength={8}
-                    maxLength={16}
-                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$"
                     onFocus={ClearInput}
                     className="border-2 p-3 rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm border-gray-300 font-semibold"
                   />
@@ -199,6 +216,7 @@ export default function Home() {
                     alt=""
                     width={24}
                     height={24}
+                    onClick={errorIconClick}
                     className="absolute top-[20%] right-4 hidden ErrorIcon"
                   ></Image>
                 </div>
@@ -212,7 +230,7 @@ export default function Home() {
                   </button>
                 </div>
               </form>
-              <h4 className=" text-center text-xs p-3 text-black/30">
+              <h4 className=" text-center text-xs p-3 text-black/30 mt-2">
                 By clicking the button, you are agreeing to our
                 <span className="ml-1 text-red-600 font-semibold">
                   Terms and Services
