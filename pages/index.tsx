@@ -91,7 +91,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon-32x32.png" />
       </Head>
-      <main className="h-[100%] xl:w-[100%] flex flex-col justify-around  relative">
+      <main className="min-h-[1000px] xl:min-h-[800px] h-[100%] xl:w-[100%] flex flex-col justify-around  relative">
         <Image
           src={bgImage}
           alt="bg-intro-pic"
