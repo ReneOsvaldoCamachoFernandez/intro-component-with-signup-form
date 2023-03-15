@@ -99,7 +99,7 @@ export default function Home() {
         ></Image>
         <div className="absolute bg-[#FF7A7A] w-[100%] h-[100%] z-0"></div>
 
-        <div className="z-20 w-full top-[10%] xl:top-[20%] xl:left-[15%] xl:h-[60%] xl:w-[70%] absolute px-5 xl:px-0 flex flex-col xl:flex-row gap-14">
+        <div className="z-20 w-full top-10 xl:top-[20%] xl:left-[15%] xl:h-[60%] xl:w-[70%] absolute px-5 xl:px-0 flex flex-col xl:flex-row gap-14">
           <div className="text-center xl:text-left text-white pb-2 mt-3 xl:mt-0 xl:w-[50%] xl:flex xl:flex-col xl:justify-center">
             <h1 className="mb-8 font-bold text-2xl px-10 xl:px-0 xl:text-5xl">
               Learn to code by watching others
