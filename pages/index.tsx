@@ -1,8 +1,66 @@
 import Head from "next/head";
 import Image from "next/image";
+import React, { useState } from "react";
 import bgmovil from "/public/bg-intro-mobile.png";
 
 export default function Home() {
+  let setFirstNameState = true;
+
+  function handleFirstNameInput(event: React.MouseEvent<HTMLButtonElement>) {
+    event.preventDefault();
+    const [inputs, labels, icons] = [
+      document.querySelectorAll("input"),
+      document.querySelectorAll("label"),
+      document.getElementsByClassName("ErrorIcon"),
+    ];
+    inputs.forEach((input, indx) => {
+      if (!input.validity.valid) {
+        input.classList.add("border-red-500");
+        input.value = "";
+        if (input.id == "Email Address") {
+          input.placeholder = "email@example/com";
+          input.classList.add("placeholder:text-red-500/50");
+          input.classList.add("text-xs");
+          input.classList.add("pl-5");
+        } else {
+          input.placeholder = "";
+        }
+
+        labels[indx].classList.remove("text-white");
+        labels[indx].classList.add("text-red-500");
+
+        icons[indx].classList.remove("hidden");
+        icons[indx].classList.add("block");
+      }
+    });
+  }
+  function ClearInput(event: React.FocusEvent<HTMLInputElement>) {
+    const [inputs, labels, icons] = [
+      document.querySelectorAll("input"),
+      document.querySelectorAll("label"),
+      document.getElementsByClassName("ErrorIcon"),
+    ];
+    inputs.forEach((input, indx) => {
+      if (input == event.currentTarget) {
+        input.classList.remove("border-red-500");
+        input.classList.add("border-gray-300");
+        if (input.id == "Email Address") {
+          input.classList.remove("placeholder:text-red-500/50");
+          input.classList.remove("text-xs");
+          input.classList.remove("pl-5");
+          input.classList.add("placeholder:text-black/1");
+          input.classList.add("text-base");
+          input.classList.add("pl-3");
+        }
+        input.placeholder = input.id;
+        labels[indx].classList.add("text-white");
+        labels[indx].classList.remove("text-red-500");
+        icons[indx].classList.add("hidden");
+        icons[indx].classList.remove("block");
+      }
+    });
+  }
+
   return (
     <>
       <Head>
@@ -19,7 +77,7 @@ export default function Home() {
         ></Image>
         <div className="absolute bg-[#FF7A7A] w-[100%] h-[100%] z-0"></div>
 
-        <div className="z-20 absolute p-5 flex flex-col gap-10">
+        <div className="z-20 w-full absolute p-5 flex flex-col gap-10">
           <div className="text-center text-white pb-2">
             <h1 className="mb-4 font-bold text-xl px-20">
               Learn to code by watching others
@@ -30,22 +88,130 @@ export default function Home() {
               developers think is invaluable.
             </p>
           </div>
-          <div className="flex flex-col gap-4 shadow-personal">
+          <div className="flex flex-col gap-4 ">
             <div className="bg-[#6055A5] py-4 px-12 rounded-lg text-center text-white shadow-personal">
               <span className="font-semibold">Try it free 7 days</span>
               <span className="text-white/50"> then $20/mo. thereafter</span>
             </div>
-            <div className="bg-white p-4 rounded-md flex flex-col gap-4 ">
-              {["First Name", "Last Name", "Email", "Address", "Password"].map(
-                (name) => (
-                  <div key={name} className="border-2 p-3 rounded-md">
-                    {name}
-                  </div>
-                )
-              )}
-              <button className="bg-[#38CC8C] text-center p-3 rounded-md text-white uppercase">
-                Claim your free trial
-              </button>
+            <div className="bg-white p-4 rounded-md flex flex-col shadow-personal gap-1">
+              <form
+                action=""
+                method="post"
+                className="flex flex-col gap-2 text-black"
+              >
+                <div className="flex flex-col relative">
+                  <input
+                    type="text"
+                    name="First Name"
+                    id="First Name"
+                    placeholder="First Name"
+                    required
+                    pattern="^[A-Z][a-z]*([ ]?[A-Z]?[a-z]*)*$"
+                    className="border-2 p-3 rounded-md block w-full shadow-sm border-gray-300 font-semibold "
+                    onFocus={ClearInput}
+                  />
+                  <label
+                    htmlFor="First Name"
+                    id="FirstNameLabel"
+                    className="text-[0.6rem] text-white place-self-end"
+                  >
+                    First Name cannot be empty
+                  </label>
+                  <Image
+                    src="/icon-error.svg"
+                    alt=""
+                    width={24}
+                    height={24}
+                    className="absolute top-[20%] right-4 hidden  ErrorIcon"
+                  ></Image>
+                </div>
+                <div className="flex flex-col relative">
+                  <input
+                    type="text"
+                    name="Last Name"
+                    id="Last Name"
+                    placeholder="Last Name"
+                    required
+                    pattern="^[A-Z][a-z]*([ ]?[A-Z]?[a-z]*)*$"
+                    onFocus={ClearInput}
+                    className="border-2 p-3 rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm border-gray-300 font-semibold"
+                  />
+                  <label
+                    htmlFor="Last Name"
+                    className="text-[0.6rem] text-white place-self-end"
+                  >
+                    Last Name cannot be empty
+                  </label>
+                  <Image
+                    src="/icon-error.svg"
+                    alt=""
+                    width={24}
+                    height={24}
+                    className="absolute top-[20%] right-4 hidden  ErrorIcon"
+                  ></Image>
+                </div>
+                <div className="flex flex-col relative">
+                  <input
+                    type="email"
+                    name="Email Address"
+                    id="Email Address"
+                    placeholder="Email Address"
+                    required
+                    pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+                    onFocus={ClearInput}
+                    className="border-2 p-3 rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm border-gray-300 font-semibold"
+                  />
+                  <label
+                    htmlFor="Email Address"
+                    className="text-[0.6rem] text-white place-self-end"
+                  >
+                    Looks like this is not an email
+                  </label>
+                  <Image
+                    src="/icon-error.svg"
+                    alt=""
+                    width={24}
+                    height={24}
+                    className="absolute top-[20%] right-4 hidden ErrorIcon"
+                  ></Image>
+                </div>
+                <div className="flex flex-col relative">
+                  <input
+                    type="password"
+                    name="Password"
+                    id="Password"
+                    placeholder="Password"
+                    required
+                    minLength={8}
+                    maxLength={16}
+                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$"
+                    onFocus={ClearInput}
+                    className="border-2 p-3 rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm border-gray-300 font-semibold"
+                  />
+                  <label
+                    htmlFor="Password"
+                    className="text-[0.6rem] text-white place-self-end"
+                  >
+                    Password cannot be empty
+                  </label>
+                  <Image
+                    src="/icon-error.svg"
+                    alt=""
+                    width={24}
+                    height={24}
+                    className="absolute top-[20%] right-4 hidden ErrorIcon"
+                  ></Image>
+                </div>
+                <div className="flex flex-col shadow-md">
+                  <button
+                    type="submit"
+                    className="bg-[#38CC8C] text-center p-3 rounded-md text-white uppercase "
+                    onClick={handleFirstNameInput}
+                  >
+                    Claim your free trial
+                  </button>
+                </div>
+              </form>
               <h4 className=" text-center text-xs p-3 text-black/30">
                 By clicking the button, you are agreeing to our
                 <span className="ml-1 text-red-600 font-semibold">
